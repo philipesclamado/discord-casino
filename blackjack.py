@@ -9,6 +9,7 @@ class Card:
     def __init__(self,rank,suit):
         self.rank = rank
         self.suit = suit
+        self.name = f"{self.rank} of {self.suit}"
 
         if type(rank) == int:
             self.point = rank
@@ -17,61 +18,71 @@ class Card:
         elif rank == "Ace":
             self.point = [1,13]
 
-    def name(self):
-        print(f"{self.rank} of {self.suit}")
 
 
-
-class Deck(Card):
+class Deck:
     def __init__(self):
         self.cards = []
         for s in suit:
             for r in rank:
                 self.cards.append(Card(r,s))
-        random.shuffle(self.cards)
+    
+    def deckSize(self):
+        print(len(self.cards))
+        pass
+
+    def deckList(self):
+        for i in range(0,len(self.cards)):
+            print(self.cards[i].name)
+        pass
 
     def deal(self):
-        print(self.cards.pop().name())
         return self.cards.pop()
 
 
-newDeck = Deck()
-newDeck.deal()
+class Hand:
+    def __init__(self):
+        self.cards = []
+        self.score = 0
+
+    def getCard(self,deck):
+        self.cards.append(deck.deal())
+        print(f"{self.cards[-1].name}")
+        if self.cards[-1].rank == "Ace":
+            if self.score + 13 > 21:
+                self.score += 1
+            else:
+                self.score += 13
+            
+        else: 
+            self.score += self.cards[-1].point
 
 
+def play():
+  deck = Deck()
+  random.shuffle(deck.cards)
 
+  computerHand = Hand()
+  print("Computer Hand:")
+  computerHand.getCard(deck)
+  computerHand.getCard(deck)
+  print(f"Computer Score: {computerHand.score}")
+  
 
-# for i in range(0,51):
-#     print(str(deck.cards[i].rank) + " of " + str(deck.cards[i].suit) + " with points of " + str(deck.cards[i].point))
+  playerHand = Hand()
+  print("Player Hand:")
+  playerHand.getCard(deck)
+  playerHand.getCard(deck)
+  print(f"Player Score: {playerHand.score}")
+  
+  if computerHand.score > playerHand.score:
+    print("Computer Win")
+  elif computerHand.score < playerHand.score:
+    print("Player Win")
+  else: 
+    print("It's A Draw")  
 
-# class Hand:
-#     def __init__(self):
-#         self.cards = []
-#         self.Score = 0
-#     def getCard(self):
-#         self.cards.append(deck.deal())
-#         self.Score += self.cards[-1].point
-   
+  pass
+  
 
-
-
-
-    
-
-
-# def play():
-#   deck = Deck()
-#   random.shuffle(deck.cards)
-
-#   handPlayer = Hand()
-#   handPlayer.getcard()
-#   handPlayer.getcard()
-
-#   handComputer = Hand()
-#   handComputer.getcard()
-#   handComputer.getcard()
-
-#   answer = ""
-
-#   while answer != "exit":
-#     answer = input()
+play()
