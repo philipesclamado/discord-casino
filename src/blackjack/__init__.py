@@ -1,10 +1,4 @@
-import random
-
-suit = ["Heart","Spade","Club","Diamond"]
-rank = [2,3,4,5,6,7,8,9,10,"Jack","Queen","King","Ace"]
-special = ["Jack","King","Queen"]
-
-
+from src.constants import RANK, SPECIAL, SUIT
 class Card:
     def __init__(self,rank,suit):
         self.rank = rank
@@ -13,7 +7,7 @@ class Card:
 
         if type(rank) == int:
             self.point = rank
-        elif rank in special:
+        elif rank in SPECIAL:
             self.point = 10
         elif rank == "Ace":
             self.point = [1,13]
@@ -23,8 +17,8 @@ class Card:
 class Deck:
     def __init__(self):
         self.cards = []
-        for s in suit:
-            for r in rank:
+        for s in SUIT:
+            for r in RANK:
                 self.cards.append(Card(r,s))
     
     def deckSize(self):
@@ -56,33 +50,3 @@ class Hand:
             
         else: 
             self.score += self.cards[-1].point
-
-
-def play():
-  deck = Deck()
-  random.shuffle(deck.cards)
-
-  computerHand = Hand()
-  print("Computer Hand:")
-  computerHand.getCard(deck)
-  computerHand.getCard(deck)
-  print(f"Computer Score: {computerHand.score}")
-  
-
-  playerHand = Hand()
-  print("Player Hand:")
-  playerHand.getCard(deck)
-  playerHand.getCard(deck)
-  print(f"Player Score: {playerHand.score}")
-  
-  if computerHand.score > playerHand.score:
-    print("Computer Win")
-  elif computerHand.score < playerHand.score:
-    print("Player Win")
-  else: 
-    print("It's A Draw")  
-
-  pass
-  
-
-play()
