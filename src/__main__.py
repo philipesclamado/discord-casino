@@ -1,4 +1,4 @@
-from src.blackjack.blackjack import blackjack
+from src import app
 
 if __name__ == "__main__":
-    blackjack()
+    app.run()
