@@ -6,7 +6,7 @@ This is the software that is going to run inside the Discord bot.
 
 Create a .env file in the same directory that contains:
 ```
-TOKEN=some_token
+TOKEN=bot_token
 ```
 
 _(Can be run without docker, just install pipenv `pip install pipenv`, `pipenv install`)_
