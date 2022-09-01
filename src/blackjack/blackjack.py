@@ -1,19 +1,20 @@
-from src.blackjack import Deck, Hand
+import deck
+import asyncio
 import random
 
 
 def blackjack():
-  deck = Deck()
+  deck = deck.Deck()
   random.shuffle(deck.cards)
 
-  computerHand = Hand()
+  computerHand = deck.Hand()
   print("Computer Hand:")
   computerHand.getCard(deck)
   computerHand.getCard(deck)
   print(f"Computer Score: {computerHand.score}")
   
 
-  playerHand = Hand()
+  playerHand = deck.Hand()
   print("Player Hand:")
   playerHand.getCard(deck)
   playerHand.getCard(deck)
@@ -27,3 +28,9 @@ def blackjack():
     print("It's A Draw")  
 
   pass
+
+
+async def blackjack_loop():
+  
+  while True:
+    await asyncio.sleep(1)
