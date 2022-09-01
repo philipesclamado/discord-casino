@@ -10,6 +10,9 @@ async def on_ready():
 
 
 def run():
-    client.run(os.environ['TOKEN'])
-
+    
+    try:
+       client.run(os.environ['TOKEN'])
+    except Exception as error:
+        print("Could not open local connection.", error)
 
